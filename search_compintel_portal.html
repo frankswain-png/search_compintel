@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Search competitive intelligence — 72-hour pulse | 8 Sep 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --elastic-blue:#0B64DD;
+  --light-teal:#48EFCF;
+  --light-poppy:#FF957D;
+  --pink:#F04E98;
+  --yellow:#FEC514;
+  --midnight:#153385;
+  --developer-blue:#101C3F;
+  --dark-ink:#1C1E23;
+  --ink:#343741;
+  --light-grey:#F5F7FA;
+  --white:#FFFFFF;
+  --font-body:'Inter',Arial,sans-serif;
+  --font-code:'Space Mono',monospace;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:var(--font-body);color:var(--ink);background:var(--white);line-height:1.6;font-size:16px;}
+a{color:var(--elastic-blue);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px;}
+
+/* Header */
+.masthead{background:var(--elastic-blue);color:var(--white);padding:36px 0 30px;}
+.masthead .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;margin:0 0 10px;}
+.masthead h1{font-size:36px;line-height:1.15;font-weight:700;margin:0 0 18px;letter-spacing:-.02em;}
+.meta-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+.meta-chip{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:5px 13px;font-size:13px;font-weight:500;}
+.header-actions{margin-top:20px;display:flex;flex-wrap:wrap;gap:10px;}
+.btn{display:inline-block;background:var(--white);color:var(--elastic-blue);border-radius:6px;padding:8px 16px;font-size:14px;font-weight:600;border:1px solid var(--white);}
+.btn:hover{text-decoration:none;background:transparent;color:var(--white);}
+.brandline{margin-top:22px;font-size:13px;opacity:.9;}
+.brandline strong{font-weight:700;}
+
+/* Solution nav */
+.solution-nav{background:var(--developer-blue);}
+.solution-nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:2px;margin:0;padding:0;}
+.solution-nav a{display:block;padding:12px 20px;color:rgba(255,255,255,.72);font-size:14px;font-weight:600;}
+.solution-nav a:hover{color:var(--white);text-decoration:none;background:rgba(255,255,255,.07);}
+.solution-nav a.current{color:var(--white);box-shadow:inset 0 -3px 0 var(--light-teal);}
+
+/* Sections */
+section{padding:44px 0 8px;}
+h2{font-size:24px;font-weight:700;color:var(--dark-ink);margin:0 0 6px;letter-spacing:-.01em;}
+h2 + .rule{width:72px;height:3px;background:var(--light-teal);border:0;margin:0 0 22px;}
+h3{font-size:19px;font-weight:700;color:var(--dark-ink);margin:0;letter-spacing:-.01em;}
+
+.tldr{background:var(--light-grey);border-left:4px solid var(--elastic-blue);border-radius:0 8px 8px 0;padding:20px 24px;font-size:16.5px;}
+.tldr p{margin:0;}
+.tldr strong{color:var(--dark-ink);font-weight:600;}
+
+/* Filter bar */
+.filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+.filter-btn{background:var(--white);border:1px solid #D3DAE6;border-radius:999px;padding:6px 15px;font-size:13.5px;font-weight:500;color:var(--ink);cursor:pointer;font-family:var(--font-body);}
+.filter-btn:hover{border-color:var(--elastic-blue);color:var(--elastic-blue);}
+.filter-btn.active{background:var(--elastic-blue);border-color:var(--elastic-blue);color:var(--white);font-weight:600;}
+
+/* Summary table */
+.summary-table{width:100%;border-collapse:collapse;font-size:14.5px;}
+.summary-table thead th{text-align:left;padding:10px 14px;background:var(--light-grey);color:var(--dark-ink);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-bottom:2px solid #D3DAE6;}
+.summary-table td{padding:14px;border-bottom:1px solid #E6EBF2;vertical-align:top;}
+.summary-table td:first-child{white-space:nowrap;font-weight:600;color:var(--dark-ink);width:190px;}
+.summary-row.no-update td{color:#6B7280;}
+.watch-signal{display:block;color:var(--midnight);font-size:13.5px;}
+.no-update-text{color:#8A94A6;font-style:italic;}
+
+/* Badges */
+.status-badge{display:inline-block;border-radius:4px;padding:2px 8px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-left:8px;vertical-align:middle;}
+.status-badge.active{background:var(--light-teal);color:var(--developer-blue);}
+.status-badge.quiet{background:#E6EBF2;color:#6B7280;}
+
+/* Vendor cards */
+.vendor-card{border:1px solid var(--developer-blue);border-radius:10px;padding:22px 26px;margin:0 0 18px;background:var(--white);}
+.vendor-card.no-update{border-color:#D3DAE6;background:var(--light-grey);}
+.vendor-card .card-head{display:flex;align-items:center;margin-bottom:6px;}
+.vendor-card .card-rule{width:60px;height:3px;background:var(--light-teal);border:0;margin:0 0 14px;}
+.vendor-card.no-update .card-rule{background:#D3DAE6;}
+.vendor-card p{margin:0 0 12px;font-size:15px;}
+.vendor-card p:last-child{margin-bottom:0;}
+.no-update-msg{color:#5A6270;font-size:15px;}
+
+/* Further reading */
+.reading-block{margin:0 0 20px;}
+.reading-block h4{font-size:15px;font-weight:700;color:var(--elastic-blue);margin:0 0 8px;}
+.reading-block ul{margin:0;padding-left:20px;}
+.reading-block li{margin-bottom:6px;font-size:14.5px;}
+
+/* Catalysts */
+.catalyst-table{width:100%;border-collapse:collapse;font-size:14.5px;}
+.catalyst-table thead th{text-align:left;padding:10px 14px;background:var(--light-grey);color:var(--dark-ink);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-bottom:2px solid #D3DAE6;}
+.catalyst-table td{padding:11px 14px;border-bottom:1px solid #E6EBF2;}
+.catalyst-table td:first-child{white-space:nowrap;font-family:var(--font-code);font-size:13px;color:var(--dark-ink);}
+
+/* Editorial notes */
+.notes{background:var(--light-grey);border-radius:8px;padding:20px 26px;font-size:14.5px;}
+.notes ol{margin:0;padding-left:20px;}
+.notes li{margin-bottom:10px;}
+.notes li:last-child{margin-bottom:0;}
+
+/* Footer */
+footer{background:var(--developer-blue);color:rgba(255,255,255,.75);margin-top:48px;padding:28px 0;font-size:13.5px;}
+footer a{color:var(--light-teal);}
+footer .tracked{margin-top:8px;opacity:.75;font-size:12.5px;}
+
+.hidden{display:none !important;}
+@media(max-width:720px){
+  .masthead h1{font-size:27px;}
+  .summary-table td:first-child{width:auto;white-space:normal;}
+}
+</style>
+</head>
+<body>
+
+<nav class="solution-nav">
+  <div class="wrap">
+    <ul>
+      <li><a class="current" href="https://frankswain-png.github.io/search_compintel/">Search</a></li>
+      <li><a href="https://frankswain-png.github.io/o11y_compintel/">Observability</a></li>
+      <li><a href="https://frankswain-png.github.io/security_compintel/">Security</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Elastic · Search competitive intelligence</p>
+    <h1>Search comp-intel 72-hour pulse</h1>
+    <div class="meta-row">
+      <span class="meta-chip">5 Sep – 8 Sep 2026</span>
+      <span class="meta-chip">Last updated: 08 Sep 2026, 11:49 UTC</span>
+      <span class="meta-chip">8 vendors tracked · 0 active · 8 quiet</span>
+    </div>
+    <div class="header-actions">
+      <a class="btn" href="https://frankswain-png.github.io/search_compintel/archive/search_archive.html">View archive</a>
+    </div>
+    <p class="brandline"><strong>elastic</strong> — The Search AI Company</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>TLDR</h2>
+    <hr class="rule">
+    <div class="tldr">
+      <p>A second consecutive quiet window: none of the eight tracked vendors published a verifiable announcement between 5 and 8 September, and the board is now visibly holding announcements for a dense conference fortnight rather than shipping into early September. The most consequential standing item remains <strong>Qdrant</strong>'s 1 September release of <strong>Qdrant-FineWeb-10B</strong> and the <strong>Supernova</strong> benchmarking framework, whose load-testing modules name Elasticsearch as a first-class target — and this run corrects the record on Qdrant's balance sheet: total funding is roughly <strong>$87.5 million</strong> after the $50 million Series B in March 2026, not $50 million. The item this tracker had been under-weighting is <strong>AWS</strong>'s purpose-built log analytics engine for Amazon OpenSearch Service, announced 1 July 2026, which moves storage to Apache Parquet and claims 4x price-performance, 2x faster ingestion and up to 70% lower storage cost at no additional charge — a direct attack on the economics Elastic competes on, and the most likely subject of expansion announcements at OpenSearchCon. <strong>Pinecone</strong>, <strong>Weaviate</strong>, <strong>Algolia</strong>, <strong>MongoDB</strong>, <strong>Databricks</strong> and <strong>Vespa</strong> were otherwise silent. Six catalysts land inside three weeks, starting tomorrow: <strong>Vespa.ai Live</strong> in London on 9–10 September, MongoDB at three investor conferences on 9, 10 and 15 September, Qdrant's <strong>Vector Space Stream</strong> on 17 September, <strong>OpenSearchCon North America</strong> on 22–24 September, Algolia at <strong>AI Engineer Paris</strong> on 23–24 September, and <strong>Algolia DevCon</strong> opening 30 September.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>At a glance</h2>
+    <hr class="rule">
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All vendors</button>
+      <button class="filter-btn" data-filter="pinecone">Pinecone</button>
+      <button class="filter-btn" data-filter="weaviate">Weaviate</button>
+      <button class="filter-btn" data-filter="opensearch">OpenSearch</button>
+      <button class="filter-btn" data-filter="algolia">Algolia</button>
+      <button class="filter-btn" data-filter="qdrant">Qdrant</button>
+      <button class="filter-btn" data-filter="mongodb">MongoDB</button>
+      <button class="filter-btn" data-filter="databricks">Databricks</button>
+      <button class="filter-btn" data-filter="vespa">Vespa</button>
+    </div>
+    <table class="summary-table">
+      <thead>
+        <tr><th>Vendor</th><th>Key development</th><th>Watch signal</th></tr>
+      </thead>
+      <tbody>
+        <tr class="summary-row no-update" data-vendor="pinecone">
+          <td>Pinecone <span class="status-badge quiet">Quiet</span></td>
+          <td><span class="no-update-text">No significant updates in the past 72 hours.</span></td>
+          <td><span class="no-update-text">—</span></td>
+        </tr>
+        <tr class="summary-row no-update" data-vendor="weaviate">
+          <td>Weaviate <span class="status-badge quiet">Quiet</span></td>
+          <td><span class="no-update-text">No significant updates in the past 72 hours.</span></td>
+          <td><span class="no-update-text">—</span></td>
+        </tr>
+        <tr class="summary-row no-update" data-vendor="opensearch">
+          <td>OpenSearch <span class="status-badge quiet">Quiet</span></td>
+          <td><span class="no-update-text">No significant updates in the past 72 hours.</span></td>
+          <td><span class="no-update-text">—</span></td>
+        </tr>
+        <tr class="summary-row no-update" data-vendor="algolia">
+          <td>Algolia <span class="status-badge quiet">Quiet</span></td>
+          <td><span class="no-update-text">No significant updates in the past 72 hours.</span></td>
+          <td><span class="no-update-text">—</span></td>
+        </tr>
+        <tr class="summary-row no-update" data-vendor="qdrant">
+          <td>Qdrant <span class="status-badge quiet">Quiet</span></td>
+          <td><span class="no-update-text">No significant updates in the past 72 hours.</span></td>
+          <td><span class="no-update-text">—</span></td>
+        </tr>
+        <tr class="summary-row no-update" data-vendor="mongodb">
+          <td>MongoDB <span class="status-badge quiet">Quiet</span></td>
+          <td><span class="no-update-text">No significant updates in the past 72 hours.</span></td>
+          <td><span class="no-update-text">—</span></td>
+        </tr>
+        <tr class="summary-row no-update" data-vendor="databricks">
+          <td>Databricks <span class="status-badge quiet">Quiet</span></td>
+          <td><span class="no-update-text">No significant updates in the past 72 hours.</span></td>
+          <td><span class="no-update-text">—</span></td>
+        </tr>
+        <tr class="summary-row no-update" data-vendor="vespa">
+          <td>Vespa <span class="status-badge quiet">Quiet</span></td>
+          <td><span class="no-update-text">No significant updates in the past 72 hours.</span></td>
+          <td><span class="no-update-text">—</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Vendor detail</h2>
+    <hr class="rule">
+
+    <div class="vendor-card no-update" data-vendor="pinecone">
+      <div class="card-head"><h3>Pinecone</h3><span class="status-badge quiet">Quiet</span></div>
+      <hr class="card-rule">
+      <p class="no-update-msg">Nothing verifiable from Pinecone in the 5–8 September window. A caution for anyone reading search results directly: the Ash Ashutosh CEO appointment and Edo Liberty's move to chief scientist are dated 8 September <em>2025</em>, not 2026, and resurface every year on this date — the PR Newswire release ID places it firmly in the 2025 sequence. The genuine standing picture is Pinecone's repositioning from vector database to knowledge layer. Pinecone Nexus reached general availability on 6 August 2026, compiling enterprise data into governed, domain-specific knowledge artifacts that agents query through KnowQL, a declarative query language designed for agents rather than humans; Pinecone's own figures claim more than 90% lower token cost than agentic RAG, answers up to 30 times faster, and above 90% task accuracy, with a reported top score on τ-Knowledge, Sierra's open enterprise-knowledge benchmark. Nexus deploys into the customer's own cloud with zero vendor access, field-level access control, per-field citations, confidence scores, PII-aware ingestion and lineage back to source. Earlier 2026 groundwork included a Microsoft OneLake integration in June, Bring Your Own Cloud for data-residency customers, and Dedicated Read Nodes in public preview from December 2025. Ashutosh's first full year is the thing to watch: a CEO drawn from Google solution sales and three storage exits suggests enterprise go-to-market discipline rather than further category redefinition, which would make Pinecone a more conventional competitor in named accounts than it has been.</p>
+    </div>
+
+    <div class="vendor-card no-update" data-vendor="weaviate">
+      <div class="card-head"><h3>Weaviate</h3><span class="status-badge quiet">Quiet</span></div>
+      <hr class="card-rule">
+      <p class="no-update-msg">No Weaviate announcements in the window, and no scheduled catalyst inside the next three weeks — the only tracked vendor with neither. The most recent release is v1.39.0 in August 2026, adding a new quantization method, new query surfaces, runtime control over schema, and performance work across search, replication and indexing; it follows the HFresh disk-based vector index of 25 June 2026, the pair addressing the memory-cost objection that has dogged Weaviate in large deployments. Free Weaviate Cloud access opened in June 2026 and Engram shipped in May 2026. On developer surface, Weaviate published Agent Skills as an open-source repository on 21 February 2026, equipping Claude Code, Cursor, GitHub Copilot, VS Code and Gemini CLI with tools for generating production Weaviate code — a distribution play that puts Weaviate inside the coding agents where retrieval choices increasingly get made, and the most strategically interesting thing the company has done this year. On funding, reported total raised stands at roughly $67.7 million following the RICOH Innovation Fund investment completed 13 March 2026 and announced 16 June 2026 on undisclosed terms. That figure now sits below Qdrant's $87.5 million, which reverses the capitalisation order between the two open-source-first vector vendors and is worth tracking if Weaviate goes back to market.</p>
+    </div>
+
+    <div class="vendor-card no-update" data-vendor="opensearch">
+      <div class="card-head"><h3>OpenSearch (AWS / Linux Foundation)</h3><span class="status-badge quiet">Quiet</span></div>
+      <hr class="card-rule">
+      <p class="no-update-msg">Nothing from the OpenSearch project or Amazon OpenSearch Service in the window, but the most competitively significant standing item on the whole board belongs here and predates this tracker's coverage of it. On 1 July 2026 AWS announced a purpose-built log analytics engine for Amazon OpenSearch Service that stores data in Apache Parquet and claims up to 4x price-performance, 2x faster ingestion, up to 2x faster analytical queries and up to 70% lower storage cost — delivered at no additional charge to existing customers. That is a columnar-storage repositioning of the managed service against exactly the log-volume economics Elastic sells on, and it is free rather than an upsell, which removes the usual friction from a migration conversation. The nearest catalyst is OpenSearchCon North America, 22–24 September at the San Jose Marriott, marking the project's fifth anniversary with 60-plus sessions across four tracks, a returning Unconference and a $250 certification voucher for live attendees; the Linux Foundation announcement of 23 July 2026 names Booking.com, Groupon, LinkedIn and Uber among speakers and frames the event around open-source search and observability powering agentic AI at enterprise scale. On product, OpenSearch 3.8.0 shipped 5 August 2026 with experimental retention policies for agentic memory, and Amazon OpenSearch Service added OpenSearch 3.7 support in July 2026 with 1-bit scalar quantization on both Faiss and Lucene engines plus an Agent Toolkit for AWS integration for driving domains from Claude Code, Kiro and Cursor. Expect September's conference to concentrate the announcements that did not trickle out this month, most plausibly extending the Parquet engine.</p>
+    </div>
+
+    <div class="vendor-card no-update" data-vendor="algolia">
+      <div class="card-head"><h3>Algolia</h3><span class="status-badge quiet">Quiet</span></div>
+      <hr class="card-rule">
+      <p class="no-update-msg">No Algolia news in the window; the company has two back-to-back September appearances and is evidently saving material for them. Algolia showcases Agent Studio at AI Engineer Paris on 23–24 September at Station F, then runs DevCon 2026 as a free virtual conference from 30 September to 1 October, whose published agenda is built around AI agents rather than site search — moving agent prototypes to production, MCP-integrated coding agents, and use cases on Agent Studio and NeuralSearch. Strategically, Algolia set out its position in "Six Bold Bets for 2026" on 13 January 2026, arguing that retrieval, scale and memory are the foundation of agentic AI and that generative discovery reinvents brand loyalty — a retrieval-infrastructure framing that moves Algolia onto the same ground Elastic occupies rather than the e-commerce search box where it has historically competed. The company reports 1.75 trillion searches a year for over 18,000 businesses, and was named a Leader in the 2026 Gartner Magic Quadrant for Search and Product Discovery for the third consecutive year. Two dating traps to note: Agent Studio and the DocSearch/AskAI self-service launch both date to September 2025, not 2026, and resurface as current every autumn; and CTO Xavier Grand's AI Day France panel at Station F was 10 February 2026, not September.</p>
+    </div>
+
+    <div class="vendor-card no-update" data-vendor="qdrant">
+      <div class="card-head"><h3>Qdrant</h3><span class="status-badge quiet">Quiet</span></div>
+      <hr class="card-rule">
+      <p class="no-update-msg">Nothing new from Qdrant inside the window, but the 1 September release of Qdrant-FineWeb-10B remains the most consequential competitive item of the past fortnight. Built with Vultr on Hugging Face's FineWeb corpus using Alibaba's gte-multilingual-base, the dataset carries 10.07 billion dense and 10.07 billion sparse vectors — 24.47 TB of vectors and 28.66 TB of source text and metadata — with exact brute-force top-1000 ground truth computed for 120,000 dense, sparse and filtered queries. Qdrant also released PubMed-Multi-Vector, holding the corpus constant across dense, sparse and ColBERT-style multi-vector representations at 8.37 billion multi-vector tokens, and Coyo-Vector-Embeddings for multimodal retrieval via Qwen3-VL-Embedding-2B. The second-order read is Supernova, the open-source framework shipped alongside: its nova-load and nova-storm modules drive parallel ingestion and search stress tests against Qdrant, Milvus and Elasticsearch, tracking QPS, p50/p95/p99 latency, build time and recall against nova-bf ground truth. Qdrant has published a credible, reproducible harness in which Elasticsearch is a named target, framed as an attack on vendor benchmarks that use synthetic data, hidden queries and paywalled engines; press pickup followed on 1 September in Blocks &amp; Files and 3 September in BigDATAwire. Two corrections to the standing record: Qdrant's total funding is roughly $87.5 million, not $50 million — the March 2026 Series B was $50 million, led by AVP with Bosch Ventures, Unusual Ventures, Spark Capital and 42CAP, on top of a $28 million Series A in 2024. And Vector Space Day in San Francisco has already happened: it ran on 11 June 2026 at The Midway with 350-plus attendees, and should not be described as upcoming. The live catalyst is Vector Space Stream on 17 September, a research-first broadcast of eight technical talks on compression, edge and hybrid search. Qdrant Edge, launched June 2026 as an in-process offline engine for robotics and edge AI, is in beta; Qdrant Serverless is listed as coming soon; GPU-accelerated indexing, multi-AZ clusters and audit logging landed in Qdrant Cloud in April 2026.</p>
+    </div>
+
+    <div class="vendor-card no-update" data-vendor="mongodb">
+      <div class="card-head"><h3>MongoDB (Atlas Search / Atlas Vector Search)</h3><span class="status-badge quiet">Quiet</span></div>
+      <hr class="card-rule">
+      <p class="no-update-msg">No MongoDB product news in the window. The financial picture reported 1 September is the standing item: Q2 FY2027 revenue of $771.8 million, up 30% year over year and ahead of a roughly $734 million consensus, with Atlas up about 29% and EA and other up about 36%. MongoDB returned to GAAP profitability at $40.9 million net income, or $0.50 per share, against a $47 million loss a year earlier, and posted non-GAAP net income of $162.6 million, or $1.90 per diluted share, versus $1.00. It ended the quarter with 70,600 customers after a record 2,900 net additions, and raised full-year FY2027 guidance to $2.99–3.03 billion with non-GAAP EPS of $6.39–6.58. The 4 September investor-conference disclosure names three appearances rather than one, all still ahead: Citi 2026 Global TMT on 9 September at 8:50 a.m. ET, Goldman Sachs Communacopia + Technology on 10 September at 10:10 a.m. PT, and Piper Sandler Growth Frontiers on 15 September at 11:30 a.m. CT. Three appearances in seven days on the back of a beat-and-raise is a management team expecting questions about durability rather than one managing expectations downward, and the Atlas-versus-EA growth split — EA growing faster than Atlas — is the number worth listening for, because it points at self-managed and on-premises demand rather than cloud. On product, the relevant recent work is dated 13 August 2026: a Managed MCP Server connecting Claude Code, Codex, Grok Build and Devin directly to Atlas operational data, and an Atlas retrieval push comprising Automated Embeddings powered by Voyage AI, the Atlas Embedding and Reranking API, voyage-code-4, and vector search inside Atlas Stream Processing. Vector search over nested embeddings reached general availability on 30 June 2026. Note that the LangChain–MongoDB partnership currently resurfacing in search results dates from 31 March 2026, and the extension of search and vector search to Community Edition and Enterprise Server was announced at MongoDB.local NYC in September 2025 — neither is new.</p>
+    </div>
+
+    <div class="vendor-card no-update" data-vendor="databricks">
+      <div class="card-head"><h3>Databricks</h3><span class="status-badge quiet">Quiet</span></div>
+      <hr class="card-rule">
+      <p class="no-update-msg">Nothing dated 5–8 September on the Databricks release notes, which carry items through 4 September only. Those items are the standing picture, and one is directly competitive: on 2 September, AI Search added indexing and filtering on struct and map columns plus filter-only queries that return rows matching a filter with no vector or keyword retrieval at all — Databricks closing the gap on structured-filter retrieval patterns that have been a reason to keep a dedicated search engine in the stack. The renaming of Vector Search to AI Search is itself the signal: the product is being positioned to cover multiple retrieval patterns, not vector similarity alone, and it now runs HNSW ANN with L2 distance inside the governance and lineage perimeter of Unity Catalog, which is the part Elastic cannot match for a customer already standardised on the lakehouse. The rest is model and platform plumbing: OpenAI GPT-6 Astra on Unity Gateway for agentic search and long-context work on 4 September; OpenSharing for metric views in beta and environment version 6 on 3 September; Git Folder Serverless in beta and Google Gemini 3.8 Flash as a hosted model on 2 September; and on 1 September, Genie One web search in beta with source citation, Genie Code scheduled tasks at general availability, Anthropic Claude Fable 5.1 on Unity Gateway, Apache Arrow support for Zerobus Ingest at general availability, and automatic change data feed at general availability. Three deprecations land this month and are worth flagging to any joint customer: public S3 links for the legacy Simba JDBC Driver are being disabled, the Terraform deployment engine is being dropped from new Databricks CLI releases, and dedicated group clusters become the default for compliance-security-profile workspaces. Releases are staged, so accounts may not see the September features for a week or more. Further back, Data + AI Summit in June 2026 produced Genie One, Genie Ontology, Agent Bricks, Omnigent, Unity Catalog Metrics, Unity AI Gateway, Catalog Federation, Lakebase, LTAP and Lakehouse RT.</p>
+    </div>
+
+    <div class="vendor-card no-update" data-vendor="vespa">
+      <div class="card-head"><h3>Vespa (Vespa.ai)</h3><span class="status-badge quiet">Quiet</span></div>
+      <hr class="card-rule">
+      <p class="no-update-msg">No Vespa announcements in the window, though the nearest catalyst on the whole board is Vespa's and it starts tomorrow. Correcting the date carried in the previous edition: the main Vespa.ai Live event is 10 September at the Lumiere London Underwood Flagship Venue, with pre-event training on 9 September — "Vespa 101: Getting started with Vespa" and "Ranking 202: A deeper dive into improving retrieval quality" — alongside a joint evening with the London Information Retrieval &amp; AI Meetup Group and the London Search &amp; AI User Group on the same day. Speakers include Walmart, Etsy and RavenPack plus a keynote from co-founder and CEO Jon Bratseth, and the event is explicitly pitched at "teams exploring alternatives beyond traditional vector databases" — which is a positioning claim aimed as much at Elastic and Pinecone as at the pure vector vendors, and worth having someone monitor the talk abstracts. The strategically interesting standing item is the August 2026 partnership with Voyage AI by MongoDB, introducing an architecture that removes the recurring cost of regenerating embeddings for every user query — an unusual arrangement given MongoDB competes with Vespa directly, and one that reads as Vespa choosing embedding-cost economics over competitive tidiness. Earlier 2026 work centred on developer surface and operability: the Vespa Kubernetes Operator and the Vespa.ai Playground in February, Pyvespa 1.0 in May, a Nexla partnership announced 18 February 2026 covering real-time AI search across enterprise data sources, and .NET support for Vespa.ai OSS contributed by Outmatic.</p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Further reading</h2>
+    <hr class="rule">
+
+    <div class="reading-block" data-vendor="opensearch">
+      <h4>OpenSearch</h4>
+      <ul>
+        <li><a href="https://aws.amazon.com/about-aws/whats-new/2026/07/amazon-opensearch-service-optimized-log-analytics/">Amazon OpenSearch Service optimized for log analytics — AWS What's New</a></li>
+        <li><a href="https://aws.amazon.com/blogs/big-data/run-log-analytics-for-a-fraction-of-the-cost-with-the-new-engine-for-amazon-opensearch-service/">Run log analytics for a fraction of the cost with the new engine for Amazon OpenSearch Service — AWS Big Data Blog</a></li>
+        <li><a href="https://www.linuxfoundation.org/press/opensearchcon-north-america-2026-to-showcase-five-years-of-innovation-powering-enterprise-search-observability-and-analytics">OpenSearchCon North America 2026 to showcase five years of innovation — Linux Foundation</a></li>
+        <li><a href="https://opensearch.org/event/opensearchcon-north-america/">OpenSearchCon North America 2026 — OpenSearch</a></li>
+      </ul>
+    </div>
+
+    <div class="reading-block" data-vendor="qdrant">
+      <h4>Qdrant</h4>
+      <ul>
+        <li><a href="https://qdrant.tech/blog/series-b-announcement/">We raised $50M to build composable vector search as core infrastructure — Qdrant</a></li>
+        <li><a href="https://www.blocksandfiles.com/ai-ml/2026/03/12/qdrant-pockets-50m-to-push-composable-vector-search/5209027">Qdrant pockets $50M to push composable vector search — Blocks &amp; Files</a></li>
+        <li><a href="https://qdrant.tech/blog/vector-space-day-2026-recap/">Qdrant lands in SF: Vector Space Day 2026 recap — Qdrant</a></li>
+      </ul>
+    </div>
+
+    <div class="reading-block" data-vendor="pinecone">
+      <h4>Pinecone</h4>
+      <ul>
+        <li><a href="https://docs.pinecone.io/release-notes/2026">2026 release notes — Pinecone</a></li>
+        <li><a href="https://venturebeat.com/ai/from-shiny-object-to-sober-reality-the-vector-database-story-two-years-later">From shiny object to sober reality: the vector database story, two years later — VentureBeat</a></li>
+      </ul>
+    </div>
+
+    <div class="reading-block" data-vendor="algolia">
+      <h4>Algolia</h4>
+      <ul>
+        <li><a href="https://www.algolia.com/devcon">Algolia DevCon 2026 — Algolia</a></li>
+        <li><a href="https://ai.engineer/paris/2026">AI Engineer Paris 2026: September 23–24 at Station F — AI Engineer</a></li>
+      </ul>
+    </div>
+
+    <div class="reading-block" data-vendor="databricks">
+      <h4>Databricks</h4>
+      <ul>
+        <li><a href="https://docs.databricks.com/aws/en/release-notes/product/2026/september">September 2026 platform release notes — Databricks on AWS</a></li>
+        <li><a href="https://docs.databricks.com/aws/en/ai-search/ai-search">Databricks AI Search — Databricks on AWS</a></li>
+      </ul>
+    </div>
+
+    <div class="reading-block" data-vendor="mongodb">
+      <h4>MongoDB</h4>
+      <ul>
+        <li><a href="https://investors.mongodb.com/news-events/news-releases">News releases — MongoDB Investor Relations</a></li>
+        <li><a href="https://www.stocktitan.net/news/MDB/mongo-db-inc-to-present-at-upcoming-investor-7cd2a5uva1pd.html">Three conferences will include MongoDB presentations in September — StockTitan</a></li>
+      </ul>
+    </div>
+
+    <div class="reading-block" data-vendor="vespa">
+      <h4>Vespa</h4>
+      <ul>
+        <li><a href="https://content.vespa.ai/vespa-live">Vespa.ai Live — Vespa.ai</a></li>
+        <li><a href="https://vespa.ai/events/vespa-live-updates/">Vespa Live updates — Vespa.ai</a></li>
+      </ul>
+    </div>
+
+    <div class="reading-block" data-vendor="weaviate">
+      <h4>Weaviate</h4>
+      <ul>
+        <li><a href="https://forum.weaviate.io/t/weaviate-v1-39-0-release-announcement/22614">Weaviate v1.39.0 release announcement — Weaviate Community Forum</a></li>
+        <li><a href="https://github.com/weaviate/weaviate/releases">Releases — weaviate/weaviate on GitHub</a></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Catalysts in the next three weeks</h2>
+    <hr class="rule">
+    <table class="catalyst-table">
+      <thead><tr><th>Date</th><th>Vendor</th><th>Event</th></tr></thead>
+      <tbody>
+        <tr><td>9 Sep 2026</td><td>Vespa</td><td>Vespa.ai Live pre-event training + London IR &amp; AI Meetup, London</td></tr>
+        <tr><td>9 Sep 2026</td><td>MongoDB</td><td>Citi 2026 Global TMT Conference, 8:50 a.m. ET</td></tr>
+        <tr><td>10 Sep 2026</td><td>Vespa</td><td>Vespa.ai Live main event, Lumiere London — Walmart, Etsy, RavenPack, Jon Bratseth keynote</td></tr>
+        <tr><td>10 Sep 2026</td><td>MongoDB</td><td>Goldman Sachs Communacopia + Technology, 10:10 a.m. PT</td></tr>
+        <tr><td>15 Sep 2026</td><td>MongoDB</td><td>Piper Sandler Growth Frontiers Conference, 11:30 a.m. CT</td></tr>
+        <tr><td>17 Sep 2026</td><td>Qdrant</td><td>Vector Space Stream — eight technical talks on compression, edge and hybrid search</td></tr>
+        <tr><td>22–24 Sep 2026</td><td>OpenSearch</td><td>OpenSearchCon North America, San Jose Marriott — 60+ sessions, four tracks</td></tr>
+        <tr><td>23–24 Sep 2026</td><td>Algolia</td><td>AI Engineer Paris, Station F — Agent Studio demos</td></tr>
+        <tr><td>30 Sep – 1 Oct 2026</td><td>Algolia</td><td>DevCon 2026, virtual</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Editorial notes</h2>
+    <hr class="rule">
+    <div class="notes">
+      <h3 style="font-size:16px;margin-bottom:12px;">Method, judgment calls and discarded items</h3>
+      <ol>
+        <li><strong>Window.</strong> The strict 72-hour window is 5–8 September 2026, measured to 11:49 UTC. Nothing verifiable landed in it for any of the eight vendors, so all eight are marked no-update rather than stretching the window to fill the page. This is the second consecutive quiet edition.</li>
+        <li><strong>Corrections to the previous edition.</strong> Three standing items were wrong or incomplete and are fixed here: Qdrant's total funding is roughly $87.5 million, not $50 million; Vespa.ai Live in London is 10 September with pre-event training on 9 September, not a single 9 September event; and Qdrant's Vector Space Day in San Francisco ran on 11 June 2026 and is past, not upcoming.</li>
+        <li><strong>New standing item.</strong> AWS's purpose-built log analytics engine for Amazon OpenSearch Service (1 July 2026, Apache Parquet storage, up to 70% lower storage cost at no additional charge) was absent from prior editions and is arguably the most competitively material item in the current standing picture.</li>
+        <li><strong>Discarded as misdated.</strong> Search results repeatedly resurfaced these as current; all are wrong for this window. Pinecone's Ash Ashutosh CEO appointment is 8 September 2025. Algolia's Agent Studio and DocSearch/AskAI launches are September 2025. Algolia CTO Xavier Grand's AI Day France panel was 10 February 2026. MongoDB's extension of search and vector search to Community Edition and Enterprise Server was announced at MongoDB.local NYC in September 2025. The LangChain–MongoDB partnership is 31 March 2026. Weaviate's $50 million Series B is 2023, not 2026.</li>
+        <li><strong>Further reading.</strong> Every link comes from this run's searches. Blocks &amp; Files and BigDATAwire coverage of Qdrant-FineWeb-10B is cited in the Qdrant card as dated context but is a 1–3 September item, outside the window.</li>
+        <li><strong>Template access.</strong> This edition was rebuilt rather than edited in place. The previous portal sits under <code>~/Library/Application Support</code>, which the file tools block as a protected location, and the published raw HTML is not fetchable, so the original CSS and markup were reconstructed from the rendered page. Move the portal to a normal folder such as <code>~/Documents/search-compintel/</code> and repoint both the scheduled task and <code>push_search.py</code> so future runs can edit in place and stop drifting on styling.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><strong>Search comp-intel 72-hour pulse</strong> — 5 Sep – 8 Sep 2026 edition · <a href="https://frankswain-png.github.io/search_compintel/archive/search_archive.html">View archive</a></div>
+    <div class="tracked">Tracked: Pinecone · Weaviate · OpenSearch · Algolia · Qdrant · MongoDB · Databricks · Vespa</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var buttons = document.querySelectorAll('.filter-btn');
+  function applyFilter(vendor){
+    var targets = document.querySelectorAll('[data-vendor]');
+    for (var i=0;i<targets.length;i++){
+      var el = targets[i];
+      if (vendor === 'all' || el.getAttribute('data-vendor') === vendor){
+        el.classList.remove('hidden');
+      } else {
+        el.classList.add('hidden');
+      }
+    }
+  }
+  for (var i=0;i<buttons.length;i++){
+    buttons[i].addEventListener('click', function(){
+      for (var j=0;j<buttons.length;j++){ buttons[j].classList.remove('active'); }
+      this.classList.add('active');
+      applyFilter(this.getAttribute('data-filter'));
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
