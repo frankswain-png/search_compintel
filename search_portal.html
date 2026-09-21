@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Search competitive intelligence — 72-hour pulse | 21 Sep 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --elastic-blue:#0B64DD;
+  --light-teal:#48EFCF;
+  --light-poppy:#FF957D;
+  --pink:#F04E98;
+  --yellow:#FEC514;
+  --midnight:#153385;
+  --developer-blue:#101C3F;
+  --light-grey:#F5F7FA;
+  --medium-grey:#D3DAE6;
+  --dark-ink:#1C1E23;
+  --ink:#343741;
+  --white:#FFFFFF;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--white);
+  color:var(--ink);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* ---------- header ---------- */
+.site-header{background:var(--elastic-blue);color:var(--white);padding:28px 0 32px}
+.header-top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;opacity:.95}
+.archive-link{
+  display:inline-block;background:var(--white);color:var(--elastic-blue);
+  text-decoration:none;font-size:13px;font-weight:700;
+  padding:7px 16px;border-radius:999px;white-space:nowrap;
+}
+.archive-link:hover{background:var(--light-teal);color:var(--developer-blue)}
+.site-header h1{
+  font-weight:800;letter-spacing:-.02em;
+  font-size:clamp(28px,5vw,46px);line-height:1.08;margin:0 0 10px;
+}
+.subtitle{font-size:13px;font-weight:600;opacity:.9;margin:0 0 20px}
+.subtitle strong{font-weight:800}
+.solution-nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.solution-nav a{
+  text-decoration:none;font-size:13px;font-weight:700;
+  padding:7px 18px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.5);color:var(--white);
+}
+.solution-nav a:hover{background:rgba(255,255,255,.18)}
+.solution-nav a.current{background:var(--white);color:var(--elastic-blue);border-color:var(--white)}
+.meta-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.meta-chip{
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);
+  border-radius:999px;padding:5px 14px;font-size:13px;font-weight:600;
+}
+.meta-chip.accent{background:var(--light-teal);border-color:var(--light-teal);color:var(--developer-blue)}
+
+/* ---------- sections ---------- */
+section{padding:40px 0}
+section.alt{background:var(--light-grey)}
+.section-label{
+  font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--midnight);
+  font-size:13px;margin:0 0 4px;
+}
+.section-heading-rule{height:4px;width:64px;background:var(--light-teal);border-radius:2px;margin:0 0 22px}
+h3{font-weight:700;font-size:19px;color:var(--dark-ink);margin:0 0 4px;letter-spacing:-.01em}
+p{margin:0 0 14px}
+a{color:var(--elastic-blue)}
+
+/* ---------- quick read / TLDR ---------- */
+.quick-read-section{padding-top:36px}
+.quick-read{
+  background:var(--white);border:1px solid var(--medium-grey);
+  border-left:5px solid var(--elastic-blue);border-radius:8px;padding:22px 26px;
+}
+.quick-read-label{
+  font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--elastic-blue);
+  font-size:12px;margin:0 0 10px;
+}
+.quick-read p:not(.quick-read-label){margin:0;font-size:17px;line-height:1.7;color:var(--dark-ink)}
+.quick-read strong{font-weight:700;color:var(--midnight)}
+
+/* ---------- filter bar ---------- */
+.filter-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 22px}
+.filter-pill{
+  cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;
+  padding:7px 16px;border-radius:999px;
+  background:var(--white);color:var(--ink);border:1px solid var(--medium-grey);
+  transition:opacity .15s ease;
+}
+.filter-pill:hover{border-color:var(--elastic-blue);color:var(--elastic-blue)}
+.filter-pill.is-hidden{background:var(--light-grey);color:#9aa1b0;border-color:var(--medium-grey);opacity:.6;text-decoration:line-through}
+.filter-pill.reset-pill{background:var(--developer-blue);color:var(--white);border-color:var(--developer-blue);font-weight:700}
+.filter-pill.reset-pill:hover{background:var(--midnight);color:var(--white)}
+.filter-count{font-size:13px;color:#6a6f7b;margin-left:4px}
+
+/* ---------- summary section ---------- */
+.summary-section{background:var(--white);border:1px solid var(--medium-grey);border-radius:8px;overflow:hidden}
+.summary-row{display:grid;grid-template-columns:180px 1fr 1fr;gap:16px;padding:16px;border-top:1px solid var(--medium-grey)}
+.summary-row:first-child{border-top:none}
+.summary-row .vendor-cell{font-weight:700;color:var(--dark-ink)}
+.summary-row.no-update{color:#6a6f7b}
+.watch-signal{display:block;color:var(--midnight);font-weight:600;font-size:14px}
+.no-update-text{color:#6a6f7b;font-style:italic}
+.summary-col-label{display:none}
+
+.status-badge{
+  display:inline-block;font-size:10px;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;padding:3px 9px;border-radius:999px;margin-left:8px;vertical-align:middle;
+}
+.status-badge.active{background:var(--light-teal);color:var(--developer-blue)}
+.status-badge.quiet{background:var(--medium-grey);color:var(--ink)}
+
+/* ---------- vendor cards ---------- */
+.vendors-grid{display:block}
+.vendor-card{
+  background:var(--white);border:1px solid var(--developer-blue);border-radius:10px;
+  padding:26px 28px;margin:0 0 20px;
+}
+.vendor-card h3{margin-bottom:14px}
+.vendor-card p:last-child{margin-bottom:0}
+.vendor-card.no-update{border-color:var(--medium-grey);background:var(--light-grey)}
+.no-update-msg{color:#5b6070;font-size:15px;margin:0}
+
+/* ---------- further reading ---------- */
+.further-reading{display:block}
+.fr-vendor{margin:0 0 22px}
+.fr-vendor h4{font-size:15px;font-weight:800;color:var(--dark-ink);margin:0 0 8px;letter-spacing:.01em}
+.fr-vendor ul{margin:0;padding-left:20px}
+.fr-vendor li{margin-bottom:6px;font-size:15px}
+.fr-link{color:var(--elastic-blue)}
+
+/* ---------- footer ---------- */
+.site-footer{background:var(--developer-blue);color:var(--white);padding:30px 0;font-size:14px}
+.site-footer a{color:var(--light-teal)}
+.site-footer .tracked{opacity:.7;font-size:13px;margin:10px 0 0}
+
+@media(max-width:720px){
+  .summary-row{grid-template-columns:1fr}
+  .summary-col-label{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#9aa1b0;margin-bottom:2px}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="header-top">
+      <span class="eyebrow">Elastic · Search competitive intelligence</span>
+      <a class="archive-link" href="https://frankswain-png.github.io/search_compintel/archive/search_archive.html">View archive</a>
+    </div>
+    <h1>Search competitive intelligence — 72-hour pulse</h1>
+    <p class="subtitle"><strong>elastic</strong> — The Search AI Company</p>
+    <nav class="solution-nav">
+      <a class="current" href="https://frankswain-png.github.io/search_compintel/">Search</a>
+      <a href="https://frankswain-png.github.io/o11y_compintel/">Observability</a>
+      <a href="https://frankswain-png.github.io/security_compintel/">Security</a>
+    </nav>
+    <div class="meta-row">
+      <span class="meta-chip accent">18 Sep – 21 Sep 2026</span>
+      <span class="meta-chip">Last updated: 21 Sep 2026, 07:22 UTC</span>
+      <span class="meta-chip">8 vendors tracked · 1 active · 7 quiet</span>
+    </div>
+  </div>
+</header>
+
+<section class="quick-read-section">
+  <div class="wrap">
+    <div class="quick-read">
+      <p class="quick-read-label">TLDR</p>
+      <p>This is an unusually quiet window: <strong>Databricks</strong> is the only vendor with a verifiable in-window development, and even that is governance plumbing rather than a retrieval feature — <strong>Databricks Apps telemetry</strong> and default-on Apps for compliance-profile workspaces both reached general availability on 18 September, continuing a month of Unity Catalog and Unity Gateway hardening rather than search or ranking work. <strong>Pinecone</strong>, <strong>Weaviate</strong>, <strong>OpenSearch</strong>, <strong>Algolia</strong>, <strong>Qdrant</strong>, <strong>MongoDB</strong> and <strong>Vespa</strong> all published nothing verifiable in the 72 hours to 21 September, several of them because their most recent activity — Weaviate's 4-bit Rotational Quantization post and Qdrant's Vector Space Stream broadcast, both on 17 September — landed just one day before the window opened. The theme, to the extent there is one, is a pause: most of the field shipped its September work in the week before this window and is now holding for the conference calendar ahead. That calendar is the thing to watch next: OpenSearchCon North America runs 22–24 September in San Jose, MongoDB holds an investor day in New York on 29 September, and both Algolia's DevCon and Vespa's appearance at Shoptalk Fall run 30 September to 1 October.</p>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <p class="section-label">At a glance</p>
+    <div class="section-heading-rule"></div>
+    <div class="filter-bar">
+      <button class="filter-pill" data-vendor="pinecone">Pinecone</button>
+      <button class="filter-pill" data-vendor="weaviate">Weaviate</button>
+      <button class="filter-pill" data-vendor="opensearch">OpenSearch</button>
+      <button class="filter-pill" data-vendor="algolia">Algolia</button>
+      <button class="filter-pill" data-vendor="qdrant">Qdrant</button>
+      <button class="filter-pill" data-vendor="mongodb">MongoDB</button>
+      <button class="filter-pill" data-vendor="databricks">Databricks</button>
+      <button class="filter-pill" data-vendor="vespa">Vespa</button>
+      <button class="filter-pill reset-pill" id="resetFilters">Reset</button>
+      <span class="filter-count" id="filterCount">8 of 8 vendors shown</span>
+    </div>
+    <div class="summary-section">
+      <div class="summary-row no-update" data-vendor="pinecone">
+        <div class="vendor-cell"><span class="summary-col-label">Vendor</span>Pinecone <span class="status-badge quiet">Quiet</span></div>
+        <div><span class="summary-col-label">Key development</span><span class="no-update-text">No significant updates in the past 72 hours.</span></div>
+        <div><span class="summary-col-label">Watch signal</span><span class="no-update-text">—</span></div>
+      </div>
+      <div class="summary-row no-update" data-vendor="weaviate">
+        <div class="vendor-cell"><span class="summary-col-label">Vendor</span>Weaviate <span class="status-badge quiet">Quiet</span></div>
+        <div><span class="summary-col-label">Key development</span><span class="no-update-text">No significant updates in the past 72 hours.</span></div>
+        <div><span class="summary-col-label">Watch signal</span><span class="no-update-text">—</span></div>
+      </div>
+      <div class="summary-row no-update" data-vendor="opensearch">
+        <div class="vendor-cell"><span class="summary-col-label">Vendor</span>OpenSearch <span class="status-badge quiet">Quiet</span></div>
+        <div><span class="summary-col-label">Key development</span><span class="no-update-text">No significant updates in the past 72 hours.</span></div>
+        <div><span class="summary-col-label">Watch signal</span><span class="no-update-text">—</span></div>
+      </div>
+      <div class="summary-row no-update" data-vendor="algolia">
+        <div class="vendor-cell"><span class="summary-col-label">Vendor</span>Algolia <span class="status-badge quiet">Quiet</span></div>
+        <div><span class="summary-col-label">Key development</span><span class="no-update-text">No significant updates in the past 72 hours.</span></div>
+        <div><span class="summary-col-label">Watch signal</span><span class="no-update-text">—</span></div>
+      </div>
+      <div class="summary-row no-update" data-vendor="qdrant">
+        <div class="vendor-cell"><span class="summary-col-label">Vendor</span>Qdrant <span class="status-badge quiet">Quiet</span></div>
+        <div><span class="summary-col-label">Key development</span><span class="no-update-text">No significant updates in the past 72 hours.</span></div>
+        <div><span class="summary-col-label">Watch signal</span><span class="no-update-text">—</span></div>
+      </div>
+      <div class="summary-row no-update" data-vendor="mongodb">
+        <div class="vendor-cell"><span class="summary-col-label">Vendor</span>MongoDB <span class="status-badge quiet">Quiet</span></div>
+        <div><span class="summary-col-label">Key development</span><span class="no-update-text">No significant updates in the past 72 hours.</span></div>
+        <div><span class="summary-col-label">Watch signal</span><span class="no-update-text">—</span></div>
+      </div>
+      <div class="summary-row" data-vendor="databricks">
+        <div class="vendor-cell"><span class="summary-col-label">Vendor</span>Databricks <span class="status-badge active">Active</span></div>
+        <div><span class="summary-col-label">Key development</span>On 18 September, Databricks Apps telemetry and default-on Databricks Apps for compliance-security-profile workspaces both reached general availability, the latest in a month-long run of Unity Catalog and Unity Gateway governance hardening rather than retrieval or ranking work.</div>
+        <div><span class="summary-col-label">Watch signal</span><span class="watch-signal">Each governance release narrows the argument that a lakehouse-native workload needs a separate, purpose-built engine for compliance reasons alone — the retrieval-quality gap remains the case for keeping one.</span></div>
+      </div>
+      <div class="summary-row no-update" data-vendor="vespa">
+        <div class="vendor-cell"><span class="summary-col-label">Vendor</span>Vespa <span class="status-badge quiet">Quiet</span></div>
+        <div><span class="summary-col-label">Key development</span><span class="no-update-text">No significant updates in the past 72 hours.</span></div>
+        <div><span class="summary-col-label">Watch signal</span><span class="no-update-text">—</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="section-label">Vendor details</p>
+    <div class="section-heading-rule"></div>
+    <div class="vendors-grid">
+
+      <div class="vendor-card no-update" data-vendor="pinecone">
+        <h3>Pinecone <span class="status-badge quiet">Quiet</span></h3>
+        <p class="no-update-msg">Nothing new from Pinecone between 18 and 21 September — the 2026 changelog's newest entries remain dated 15 September, six days before this edition. Those 15 September entries raised the pod-to-serverless migration limit to 500 million records, added Gemini 3.5 Flash to Assistant chat, and auto-routed Assistant requests for the now-deprecated Gemini 2.5 Pro and o4-mini to newer models at the same price. On 13 September, the Enterprise namespace limit was raised to 1,000,000. Standing items: full-text search and the Documents API reached general availability on API version <code>2026-07</code> on 2 September, combining BM25, dense-vector and sparse-vector ranking in one schema-based index; the same day brought egress metering (1 GB/10 GB/100 GB monthly allowances by plan) and the end of the one-time $250 bulk import credit for new Standard and Enterprise subscriptions. Pinecone Marketplace reached end of life on 31 August, Bring Your Own Cloud reached general availability on 25 August across AWS, GCP and Azure, and Pinecone Nexus reached general availability on 6 August.</p>
+      </div>
+
+      <div class="vendor-card no-update" data-vendor="weaviate">
+        <h3>Weaviate <span class="status-badge quiet">Quiet</span></h3>
+        <p class="no-update-msg">Nothing new from Weaviate in the 18–21 September window; the blog's most recent post is dated 17 September, one day before this window opened. That post, "4-bit Rotational Quantization," is substantial — it covers the SIMD performance work behind 4-bit rotational quantization in Weaviate 1.39, a centered tier, scaling analysis and a comparison against TurboQuant — but it falls just outside the strict 72-hour cutoff and is recorded here as dated context, not a new development. Standing items: the HFresh disk-based vector index was covered in depth on 9 September, and the third instalment of the Foundry creative-search series published 8 September. Weaviate 1.39 shipped 27 August, promoting the Boost API and MMR diversity selection to general availability and shipping an experimental Search REST API. Weaviate Cloud became free to start across the whole product suite on 17 June, Engram (managed memory for agentic applications) reached general availability in June, and Ricoh invested in Weaviate through the RICOH Innovation Fund, announced 16 June. Weaviate Agent Skills, an open-source repository equipping coding agents with Weaviate-specific tooling, launched 21 February.</p>
+      </div>
+
+      <div class="vendor-card no-update" data-vendor="opensearch">
+        <h3>OpenSearch (AWS / Linux Foundation) <span class="status-badge quiet">Quiet</span></h3>
+        <p class="no-update-msg">Nothing from the OpenSearch project or Amazon OpenSearch Service in the 18–21 September window; the project's own news page has nothing dated after 3 July. That silence lines up with the calendar: OpenSearchCon North America is scheduled for 22–24 September at the San Jose Marriott, one day after this edition closes, marking the project's fifth anniversary with more than 60 keynotes, lightning talks, breakout sessions and developer workshops on real-time monitoring, OpenTelemetry integrations, search architecture and agentic AI. Standing items: OpenSearch 3.8 shipped 5 August with experimental retention policies for agentic memory that automatically expire sessions, long-term memories and history entries; the project was also named winner of the Analytics & Data Intelligence Solutions category in SiliconANGLE's 2026 TechForward Awards. Expect the conference to concentrate whatever has been held back this month.</p>
+      </div>
+
+      <div class="vendor-card no-update" data-vendor="algolia">
+        <h3>Algolia <span class="status-badge quiet">Quiet</span></h3>
+        <p class="no-update-msg">Nothing from Algolia's newsroom in the 18–21 September window. Standing items: Algolia DevCon 2026 is scheduled for 30 September–1 October as a free, two-day virtual developer conference built around AI agents, MCP-integrated coding agents and Agent Studio use cases. On 9 September — now outside this window — Algolia appointed Steven Chung as chief revenue officer, from Starburst, and Veronica Servantez as chief marketing officer, from Genesys, completing a commercial leadership rebuild under chief executive Stephen Lynch, who took the role in April. Algolia earned 12 badges in the G2 Spring 2026 Grid reports in April, and published its "Six Bold Bets for 2026" positioning statement on 13 January.</p>
+      </div>
+
+      <div class="vendor-card no-update" data-vendor="qdrant">
+        <h3>Qdrant <span class="status-badge quiet">Quiet</span></h3>
+        <p class="no-update-msg">Nothing new from Qdrant in the 18–21 September window; the two most recent items on the blog — the SHIFTing Languages multilingual-RAG technique on 16 September and the Vector Space Stream broadcast on 17 September — both land immediately before this window opens. Vector Space Stream was a free, four-hour virtual research broadcast of eight technical talks on compression, edge deployment and hybrid search, explicitly framed as fully technical with no marketing content. Standing items: Qdrant 1.19 shipped 5 August with the TurboQuant datatype and memory tiers; Bayer's myGenAssist case study, published 13 August, described a 135-million-point deployment on Qdrant Hybrid Cloud with semantic caching and multitenancy. Qdrant's 8 July post claiming its DiskBBQ-configured benchmark beats Elastic's DiskBBQ at twice the throughput and half the latency remains an open dispute field teams should expect to meet. The company's last disclosed funding is a $50 million Series B, led by AVP with Bosch Ventures, Unusual Ventures, Spark Capital and 42CAP, closed 12 March.</p>
+      </div>
+
+      <div class="vendor-card no-update" data-vendor="mongodb">
+        <h3>MongoDB (Atlas Search / Atlas Vector Search) <span class="status-badge quiet">Quiet</span></h3>
+        <p class="no-update-msg">Nothing new from MongoDB in the 18–21 September window. Standing items: MongoDB holds an investor day in New York on 29 September, still ahead. On 1 September, MongoDB reported second-quarter fiscal 2027 results — revenue of $771.8 million, up about 30% year over year, with Atlas revenue up about 29% and 70,600 customers after a record 2,900 net additions. Richard Scott was named Head of Asia Pacific and Japan on 2 September. On 10 September — before this window — MongoDB announced that Atlas is now a connected data source in OpenAI's Data Plugin, powered by the Atlas Managed MCP Server, letting the ChatGPT Work Data agent query Atlas clusters directly; that distribution move remains the most consequential recent MongoDB item and was reported in the previous edition.</p>
+      </div>
+
+      <div class="vendor-card" data-vendor="databricks">
+        <h3>Databricks <span class="status-badge active">Active</span></h3>
+        <p>On 18 September, two Databricks platform features reached general availability together: Databricks Apps telemetry, which collects traces, logs and metrics and persists them to Unity Catalog tables using the OpenTelemetry protocol, automatically capturing system logs and usage events once enabled; and default-on Databricks Apps for workspaces with the compliance security profile enabled. Neither touches retrieval, ranking or search quality — both are governance and observability plumbing for the app layer of the platform.</p>
+        <p>Read together with the preceding week, the pattern is consistent rather than new: Unity Gateway gained support for all compliance security profile standards on 17 September, and metastore-level ABAC policies entered beta the same day, letting a single row-filter, column-mask, GRANT or DENY policy apply across every catalog in a metastore, including ones created later. Databricks has spent September closing governance and access-control gaps — telemetry, ABAC, secrets — rather than shipping retrieval features, which suggests the platform is being hardened for regulated buyers who evaluate compliance posture before they evaluate search quality.</p>
+        <p><strong>Watch signal:</strong> None of this week's items touch relevance or latency, but the accumulation of governance capability narrows the "not enterprise-ready" objection to running search workloads on the lakehouse. Elastic's counter continues to rest on retrieval quality and grounded citations, not on governance parity, which Databricks is now actively closing.</p>
+        <p>Standing items: on 16 September, Databricks announced a more than $350 million investment in Singapore alongside a partnership with EDB and Singapore's IMDA to support the country's national AI strategy — outside this window but recent. External secrets in Unity Catalog entered beta on 9 September, connecting a schema to AWS Secrets Manager so values stay in the customer's cloud account while appearing as governable, read-only securables. The <code>generate_citations</code> option in the <code>ai_search</code> SQL function, which returns the retrieved chunks supporting each generated answer, entered beta on 8 September — the one recent Databricks item that does bear directly on retrieval trust. Releases are staged, so the 18 September items may not appear in every account for a week or more.</p>
+      </div>
+
+      <div class="vendor-card no-update" data-vendor="vespa">
+        <h3>Vespa (Vespa.ai) <span class="status-badge quiet">Quiet</span></h3>
+        <p class="no-update-msg">Nothing new from Vespa in the 18–21 September window. Standing items: the September newsletter, published 8 September, added a <code>ranking.matching.anntimebudget</code> query parameter that caps ANN search by a latency budget instead of tuning exploration parameters, per-label BM25 scoring via a new <code>labeled()</code> query operator, and OpenTelemetry-based log and metric export for Vespa Cloud Enclave. Vespa.ai Live, an in-person community event, ran 9–10 September in London with a keynote from chief executive Jon Bratseth and speakers from Walmart, Etsy and RavenPack; itDAGENE at NTNU Trondheim, on 14 September, has also now passed. Vespa's next scheduled appearance is Shoptalk Fall in Nashville, still ahead, running 29 September to 1 October.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <p class="section-label">Further reading</p>
+    <div class="section-heading-rule"></div>
+    <div class="further-reading">
+      <div class="fr-vendor" data-vendor="databricks">
+        <h4>Databricks</h4>
+        <ul>
+          <li><a class="fr-link" href="https://docs.databricks.com/aws/en/release-notes/product/2026/september#databricks-apps-telemetry-is-now-generally-available">Databricks Apps telemetry is now generally available — Databricks on AWS</a></li>
+          <li><a class="fr-link" href="https://docs.databricks.com/aws/en/release-notes/product/2026/september#databricks-apps-is-now-on-by-default-for-workspaces-with-the-compliance-security-profile-enabled">Databricks Apps is now on by default for compliance-profile workspaces — Databricks on AWS</a></li>
+          <li><a class="fr-link" href="https://docs.databricks.com/aws/en/release-notes/product/2026/september#unity-gateway-support-for-compliance-security-profile-standards">Unity Gateway support for compliance security profile standards — Databricks on AWS</a></li>
+          <li><a class="fr-link" href="https://docs.databricks.com/aws/en/release-notes/product/2026/september">September 2026 platform release notes, full index — Databricks on AWS</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <strong>Search competitive intelligence — 72-hour pulse</strong> — 18 Sep – 21 Sep 2026 edition · <a href="https://frankswain-png.github.io/search_compintel/archive/search_archive.html">View archive</a>
+    <p class="tracked">Tracked: Pinecone · Weaviate · OpenSearch · Algolia · Qdrant · MongoDB · Databricks · Vespa</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'compintel-search-hidden-vendors';
+  var pills = Array.prototype.slice.call(document.querySelectorAll('.filter-pill[data-vendor]'));
+  var resetBtn = document.getElementById('resetFilters');
+  var countEl = document.getElementById('filterCount');
+  var totalVendors = pills.length;
+
+  function loadHidden(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    }catch(e){ return []; }
+  }
+  function saveHidden(hidden){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(hidden)); }catch(e){}
+  }
+  function applyHidden(hidden){
+    pills.forEach(function(pill){
+      var vendor = pill.getAttribute('data-vendor');
+      var isHidden = hidden.indexOf(vendor) !== -1;
+      pill.classList.toggle('is-hidden', isHidden);
+      var targets = document.querySelectorAll('[data-vendor="' + vendor + '"]');
+      targets.forEach(function(el){
+        if (el.classList.contains('filter-pill')) return;
+        el.style.display = isHidden ? 'none' : '';
+      });
+    });
+    var shown = totalVendors - hidden.length;
+    if (countEl) countEl.textContent = shown + ' of ' + totalVendors + ' vendors shown';
+  }
+
+  var hidden = loadHidden();
+  applyHidden(hidden);
+
+  pills.forEach(function(pill){
+    pill.addEventListener('click', function(){
+      var vendor = pill.getAttribute('data-vendor');
+      var idx = hidden.indexOf(vendor);
+      if (idx === -1) hidden.push(vendor); else hidden.splice(idx, 1);
+      saveHidden(hidden);
+      applyHidden(hidden);
+    });
+  });
+
+  if (resetBtn){
+    resetBtn.addEventListener('click', function(){
+      hidden = [];
+      saveHidden(hidden);
+      applyHidden(hidden);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
