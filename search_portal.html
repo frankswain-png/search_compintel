@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Search competitive intelligence — 72-hour pulse | 24 Sep 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --elastic-blue:#0B64DD;
+  --light-teal:#48EFCF;
+  --midnight:#153385;
+  --developer-blue:#101C3F;
+  --light-grey:#F5F7FA;
+  --medium-grey:#D3DAE6;
+  --dark-ink:#1C1E23;
+  --ink:#343741;
+  --white:#FFFFFF;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--white);color:var(--ink);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* header */
+.site-header{background:var(--elastic-blue);color:var(--white);padding:30px 0 34px}
+.site-header h1{font-weight:800;letter-spacing:-.02em;font-size:clamp(28px,4.6vw,46px);line-height:1.1;margin:0 0 8px}
+.subtitle{font-size:14px;font-weight:600;opacity:.92;margin:0 0 20px}
+.subtitle strong{font-weight:800}
+.solution-nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.solution-nav a{text-decoration:none;font-size:13px;font-weight:700;padding:7px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.5);color:var(--white)}
+.solution-nav a:hover{background:rgba(255,255,255,.18)}
+.solution-nav a.current{background:var(--white);color:var(--elastic-blue);border-color:var(--white)}
+.archive-link{display:inline-block;margin-bottom:20px;font-size:13px;font-weight:700;color:var(--white);text-decoration:underline}
+.meta-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.meta-chip{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:5px 14px;font-size:13px;font-weight:600}
+.meta-chip.accent{background:var(--light-teal);border-color:var(--light-teal);color:var(--developer-blue)}
+
+/* sections */
+section{padding:40px 0}
+section.alt{background:var(--light-grey)}
+.section-label{font-weight:800;letter-spacing:-.01em;color:var(--dark-ink);font-size:clamp(20px,2.6vw,26px);margin:0 0 18px;position:relative;padding-left:16px;border-left:5px solid var(--light-teal)}
+
+/* filter bar */
+.filter-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 22px}
+.filter-pill{cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;padding:7px 16px;border-radius:999px;background:var(--white);color:var(--ink);border:1px solid var(--medium-grey)}
+.filter-pill:hover{border-color:var(--elastic-blue);color:var(--elastic-blue)}
+.filter-pill.is-hidden{background:var(--developer-blue);border-color:var(--developer-blue);color:rgba(255,255,255,.55);text-decoration:line-through}
+.filter-pill.reset-pill{border-style:dashed}
+.filter-count{font-size:13px;color:#5b6070;font-weight:600;margin-left:auto}
+
+/* quick-read */
+.quick-read{background:var(--white);border:1px solid var(--medium-grey);border-left:5px solid var(--elastic-blue);border-radius:8px;padding:22px 26px}
+.quick-read .label{display:block;font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--midnight);margin:0 0 10px}
+.quick-read p{margin:0;font-size:17px;line-height:1.7;color:var(--dark-ink)}
+.quick-read strong{font-weight:700;color:var(--midnight)}
+
+/* summary section */
+.summary-section{display:flex;flex-direction:column;gap:10px}
+.summary-row{display:grid;grid-template-columns:180px 1fr;gap:18px;background:var(--white);border:1px solid var(--medium-grey);border-radius:8px;padding:16px 18px}
+.summary-row.no-update{color:#6a6f7b}
+.summary-row .vendor-cell{font-weight:700;color:var(--dark-ink)}
+.summary-row .dev-cell p{margin:0 0 8px;font-size:15px}
+.watch-signal{display:block;color:var(--midnight);font-weight:600;font-size:14px;margin-top:6px}
+.no-update-text{color:#6a6f7b;font-style:italic}
+.status-badge{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:999px;margin-left:8px;vertical-align:middle}
+.status-badge.active{background:var(--light-teal);color:var(--developer-blue)}
+.status-badge.quiet{background:var(--medium-grey);color:var(--ink)}
+@media(max-width:640px){.summary-row{grid-template-columns:1fr}}
+
+/* vendor cards */
+.vendors-grid{display:flex;flex-direction:column;gap:20px}
+.vendor-card{background:var(--white);border:1px solid var(--developer-blue);border-radius:10px;padding:26px 28px}
+.vendor-card h3{margin:0 0 14px;font-weight:700;font-size:20px;color:var(--dark-ink)}
+.vendor-card p{margin:0 0 14px}
+.vendor-card p:last-child{margin-bottom:0}
+.vendor-card.no-update{border-color:var(--medium-grey);background:var(--light-grey)}
+.no-update-msg{color:#5b6070;font-size:15px;margin:0 0 14px}
+code{background:var(--light-grey);border:1px solid var(--medium-grey);border-radius:4px;padding:1px 6px;font-family:'Space Mono',monospace;font-size:13px}
+.vendor-card.no-update code{background:var(--white)}
+
+/* further reading */
+.further-reading{display:flex;flex-direction:column;gap:20px}
+.fr-vendor h4{font-size:15px;font-weight:800;color:var(--dark-ink);margin:0 0 8px}
+.fr-vendor ul{margin:0;padding-left:20px}
+.fr-vendor li{margin-bottom:6px;font-size:15px}
+.fr-link{color:var(--elastic-blue)}
+
+/* footer */
+.site-footer{background:var(--developer-blue);color:var(--white);padding:28px 0;font-size:14px}
+.site-footer a{color:var(--light-teal)}
+.site-footer .tracked{opacity:.7;font-size:13px;margin:10px 0 0}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <h1>Search competitive intelligence — 72-hour pulse</h1>
+    <p class="subtitle"><strong>elastic</strong> — The Search AI Company</p>
+    <nav class="solution-nav">
+      <a class="current" href="https://frankswain-png.github.io/search_compintel/">Search</a>
+      <a href="https://frankswain-png.github.io/o11y_compintel/">Observability</a>
+      <a href="https://frankswain-png.github.io/security_compintel/">Security</a>
+    </nav>
+    <a class="archive-link" href="https://frankswain-png.github.io/search_compintel/archive/search_archive.html">View archive</a>
+    <div class="meta-row">
+      <span class="meta-chip accent">21 Sep – 24 Sep 2026</span>
+      <span class="meta-chip">Last updated: 24 Sep 2026, 07:42 UTC</span>
+      <span class="meta-chip">8 vendors tracked · 1 active · 7 quiet</span>
+    </div>
+  </div>
+</header>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-pill" data-vendor="pinecone">Pinecone</button>
+      <button class="filter-pill" data-vendor="weaviate">Weaviate</button>
+      <button class="filter-pill" data-vendor="opensearch">OpenSearch</button>
+      <button class="filter-pill" data-vendor="algolia">Algolia</button>
+      <button class="filter-pill" data-vendor="qdrant">Qdrant</button>
+      <button class="filter-pill" data-vendor="mongodb">MongoDB</button>
+      <button class="filter-pill" data-vendor="databricks">Databricks</button>
+      <button class="filter-pill" data-vendor="vespa">Vespa</button>
+      <button class="filter-pill reset-pill" id="resetPills">Reset</button>
+      <span class="filter-count" id="filterCount">8 of 8 shown</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="quick-read">
+      <span class="label">TLDR</span>
+      <p>The window's dominant event is <strong>OpenSearchCon North America</strong>, running 22–24 September in San Jose to mark the OpenSearch project's fifth anniversary, with AWS OpenSearch general manager Tia White keynoting alongside case studies from Booking.com, Groupon, LinkedIn and Uber on agentic AI at enterprise scale; project maintainers also opened the coordinated release-engineering process for <strong>OpenSearch 3.10.0</strong> across more than a dozen component repositories on 22 September. The theme this window is <strong>presence, not product</strong> — nothing else tracked produced a verifiable launch, benchmark or funding item inside the strict 72 hours. <strong>Pinecone</strong>, <strong>Weaviate</strong>, <strong>Algolia</strong>, <strong>Qdrant</strong>, <strong>MongoDB</strong>, <strong>Databricks</strong> and <strong>Vespa</strong> were all quiet, each still carrying substantive standing items from earlier in September. The next catalysts are <strong>Algolia</strong>'s DevCon on 1 October and <strong>Vespa</strong>'s appearance at Shoptalk Fall in Nashville from 29 September.</p>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2 class="section-label">At a glance</h2>
+    <div class="summary-section">
+
+      <div class="summary-row no-update" data-vendor="pinecone">
+        <div class="vendor-cell">Pinecone <span class="status-badge quiet">Quiet</span></div>
+        <div class="dev-cell">
+          <p><span class="no-update-text">No significant updates in the past 72 hours.</span></p>
+          <span class="watch-signal no-update-text">—</span>
+        </div>
+      </div>
+
+      <div class="summary-row no-update" data-vendor="weaviate">
+        <div class="vendor-cell">Weaviate <span class="status-badge quiet">Quiet</span></div>
+        <div class="dev-cell">
+          <p><span class="no-update-text">No significant updates in the past 72 hours.</span></p>
+          <span class="watch-signal no-update-text">—</span>
+        </div>
+      </div>
+
+      <div class="summary-row" data-vendor="opensearch">
+        <div class="vendor-cell">OpenSearch <span class="status-badge active">Active</span></div>
+        <div class="dev-cell">
+          <p>OpenSearchCon North America ran 22–24 September in San Jose, marking the project's fifth anniversary with a keynote from Amazon OpenSearch general manager Tia White and case studies from Booking.com, Groupon, LinkedIn and Uber on agentic AI at enterprise scale. Separately, maintainers opened coordinated release-engineering tracking issues for OpenSearch 3.10.0 across more than a dozen component repositories on 22 September.</p>
+          <span class="watch-signal">A fifth-anniversary conference and a coordinated 3.10 release cycle landing in the same 72 hours signal AWS is timing visible project momentum to the event, which prospects may cite back to Elastic field teams.</span>
+        </div>
+      </div>
+
+      <div class="summary-row no-update" data-vendor="algolia">
+        <div class="vendor-cell">Algolia <span class="status-badge quiet">Quiet</span></div>
+        <div class="dev-cell">
+          <p><span class="no-update-text">No significant updates in the past 72 hours.</span></p>
+          <span class="watch-signal no-update-text">—</span>
+        </div>
+      </div>
+
+      <div class="summary-row no-update" data-vendor="qdrant">
+        <div class="vendor-cell">Qdrant <span class="status-badge quiet">Quiet</span></div>
+        <div class="dev-cell">
+          <p><span class="no-update-text">No significant updates in the past 72 hours.</span></p>
+          <span class="watch-signal no-update-text">—</span>
+        </div>
+      </div>
+
+      <div class="summary-row no-update" data-vendor="mongodb">
+        <div class="vendor-cell">MongoDB <span class="status-badge quiet">Quiet</span></div>
+        <div class="dev-cell">
+          <p><span class="no-update-text">No significant updates in the past 72 hours.</span></p>
+          <span class="watch-signal no-update-text">—</span>
+        </div>
+      </div>
+
+      <div class="summary-row no-update" data-vendor="databricks">
+        <div class="vendor-cell">Databricks <span class="status-badge quiet">Quiet</span></div>
+        <div class="dev-cell">
+          <p><span class="no-update-text">No significant updates in the past 72 hours.</span></p>
+          <span class="watch-signal no-update-text">—</span>
+        </div>
+      </div>
+
+      <div class="summary-row no-update" data-vendor="vespa">
+        <div class="vendor-cell">Vespa <span class="status-badge quiet">Quiet</span></div>
+        <div class="dev-cell">
+          <p><span class="no-update-text">No significant updates in the past 72 hours.</span></p>
+          <span class="watch-signal no-update-text">—</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-label">Vendor details</h2>
+    <div class="vendors-grid">
+
+      <div class="vendor-card no-update" data-vendor="pinecone">
+        <h3>Pinecone <span class="status-badge quiet">Quiet</span></h3>
+        <p class="no-update-msg">Nothing from Pinecone between 21 and 24 September; the 2026 changelog has no entry inside this window.</p>
+        <p>Standing items: full-text search and the Documents API reached general availability on API version <code>2026-07</code> on 2 September, combining BM25 keyword ranking, dense-vector and sparse-vector ranking in schema-based document indexes queryable by BM25 token matching, Lucene query syntax or vector similarity. Read-egress metering began 1 September, with monthly allowances of 1GB on Starter, 10GB on Builder and 100GB on Standard and Enterprise, and the one-time $250 bulk-import credit for new Standard and Enterprise subscriptions ended the same day, with remaining balances expiring 1 November 2026. Bring Your Own Cloud reached general availability on 25 August across AWS, GCP and Azure; Pinecone Nexus reached general availability on 6 August; Pinecone Marketplace reached end of life on 31 August. The last disclosed funding round remains a $100 million Series B from April 2023.</p>
+      </div>
+
+      <div class="vendor-card no-update" data-vendor="weaviate">
+        <h3>Weaviate <span class="status-badge quiet">Quiet</span></h3>
+        <p class="no-update-msg">Nothing from Weaviate between 21 and 24 September.</p>
+        <p>Standing items: on 17 September Weaviate published a detailed piece on 4-bit rotational quantisation in Weaviate 1.39, covering SIMD performance work and a TurboQuant comparison; on 9 September, an engineering post on HFresh, its disk-based vector index for memory-efficient vector search; on 1 September, late-interaction multi-vector retrieval enabling PDF search by page appearance without OCR or chunking. Weaviate 1.39 shipped 27 August, promoting the Boost API and MMR diversity selection to general availability and previewing an experimental Search REST API. Ricoh invested in Weaviate through the RICOH Innovation Fund in a round announced 16 June; the last disclosed priced round remains a $50 million Series B in 2024.</p>
+      </div>
+
+      <div class="vendor-card" data-vendor="opensearch">
+        <h3>OpenSearch (AWS / Linux Foundation) <span class="status-badge active">Active</span></h3>
+        <p>OpenSearchCon North America is running 22–24 September at the San Jose Marriott, organised by the Linux Foundation to mark the OpenSearch Project's fifth anniversary. The keynote comes from Tia White, general manager of OpenSearch at AWS, who leads the teams behind AWS's search, analytics, vector database and observability services; the agenda pairs more than 60 keynotes, lightning talks, breakout sessions and hands-on workshops with case studies from Booking.com, Groupon, LinkedIn and Uber on architecting agentic AI at enterprise scale. Live attendees receive a $250 voucher toward the OpenSearch Certified Associate certification course.</p>
+        <p>Alongside the conference, OpenSearch maintainers opened the coordinated release-engineering process for OpenSearch 3.10.0 on 22 September: a manifest was created at <code>manifests/3.10.0</code> in the opensearch-build repository, and matching "Release version 3.10.0" tracking issues were opened across more than a dozen component repositories, including skills, notifications, index-management, search-relevance, cross-cluster-replication, opensearch-learning-to-rank-base, job-scheduler and common-utils. This is release-engineering activity, not a confirmed shipped build; no GA announcement for 3.10.0 had been published at this edition's timestamp.</p>
+        <p><strong>Watch signal:</strong> A fifth-anniversary conference and a coordinated 3.10 release cycle landing in the same 72 hours is unlikely to be coincidental. Expect AWS and the OpenSearch Project to use the conference to narrate a full year of agentic-AI and vector-search progress, which is the framing Elastic field teams should be ready to counter.</p>
+        <p>Standing items: OpenSearch 3.8.0, shipped 5 August, remains the latest confirmed stable release, adding experimental retention policies for agentic memory that automatically expire sessions, long-term memories and history entries. Amazon OpenSearch Service extended automatic semantic enrichment to VPC-enabled domains in August, and added OpenSearch 3.7 support with 1-bit scalar quantisation on both the Faiss and Lucene engines, plus an Agent Toolkit for AWS integration that drives domains and Serverless collections from Claude Code, Kiro and Cursor, in July.</p>
+      </div>
+
+      <div class="vendor-card no-update" data-vendor="algolia">
+        <h3>Algolia <span class="status-badge quiet">Quiet</span></h3>
+        <p class="no-update-msg">Nothing new from Algolia between 21 and 24 September.</p>
+        <p>Standing items: the 9 September appointment of Steven Chung as chief revenue officer, from Starburst, and Veronica Servantez as chief marketing officer, from Genesys, remains the most recent leadership news. DevCon 2026, a free virtual developer conference built around AI agents, MCP-integrated coding agents and Agent Studio, is confirmed for 1 October. Algolia was named a Leader in the 2026 Gartner Magic Quadrant for Search and Product Discovery in June, its third consecutive year, and took 12 badges in the G2 Spring 2026 Grid reports in April.</p>
+      </div>
+
+      <div class="vendor-card no-update" data-vendor="qdrant">
+        <h3>Qdrant <span class="status-badge quiet">Quiet</span></h3>
+        <p class="no-update-msg">Nothing new from Qdrant between 21 and 24 September; the blog's most recent post remains 16 September.</p>
+        <p>Standing items: the 16 September post is a case study on Bayer's myGenAssist running on Qdrant Hybrid Cloud at 135 million points, covering hybrid search for agents, semantic caching and multitenancy. On 1 September, Qdrant released Qdrant-FineWeb-10B, a 10-billion-vector open benchmark built with Vultr on the FineWeb corpus, alongside Supernova, an open-source load-testing framework that also targets Milvus and Elasticsearch. Qdrant 1.19 shipped 5 August with the TurboQuant datatype and memory tiers. The company's last disclosed round was a $50 million Series B in March 2026, led by Advance Venture Partners.</p>
+      </div>
+
+      <div class="vendor-card no-update" data-vendor="mongodb">
+        <h3>MongoDB (Atlas Search / Atlas Vector Search) <span class="status-badge quiet">Quiet</span></h3>
+        <p class="no-update-msg">Nothing new from MongoDB Atlas Search or Atlas Vector Search between 21 and 24 September.</p>
+        <p>Standing items: on 10 September Atlas became a connected data source in OpenAI's Data Plugin via the Atlas Managed MCP Server, letting the ChatGPT Work Data agent query Atlas clusters directly and turn answers into reports or dashboards. On 9 September, Europe and US data residency for the Embedding and Reranking API Service entered public preview, giving European customers a local endpoint for Voyage AI models. MongoDB reported Q2 FY2027 revenue of $771.8 million on 1 September, up 30% year over year with Atlas up about 29%, and 70,600 customers after a record 2,900 net additions.</p>
+      </div>
+
+      <div class="vendor-card no-update" data-vendor="databricks">
+        <h3>Databricks <span class="status-badge quiet">Quiet</span></h3>
+        <p class="no-update-msg">Nothing search- or retrieval-relevant landed from Databricks between 21 and 24 September; the one dated platform item in the window, general availability of the <code>system.query.history</code> system table on 21 September, is an account-admin feature rather than a search capability.</p>
+        <p>Standing items: the <code>generate_citations</code> option in the <code>ai_search</code> function entered beta on 8 September, returning which retrieved chunks support a generated answer. External secrets in Unity Catalog entered beta on 9 September, alongside beta connectors for Celigo, Anysphere Organization and Anaplan. The Databricks Excel add-in reached general availability on 10 September. AI Search gained struct and map column indexing and filter-only queries on 2 September.</p>
+      </div>
+
+      <div class="vendor-card no-update" data-vendor="vespa">
+        <h3>Vespa (Vespa.ai) <span class="status-badge quiet">Quiet</span></h3>
+        <p class="no-update-msg">Nothing new from Vespa between 21 and 24 September.</p>
+        <p>Standing items: the September newsletter, published 8 September, added a <code>ranking.matching.anntimebudget</code> query parameter that caps ANN search by latency budget, per-label BM25 scoring via <code>bm25(field, label)</code> and a <code>labeled()</code> query operator documented as the equivalent of Elasticsearch's <code>function_score</code>, plus OpenTelemetry export for Vespa Cloud Enclave. Vespa.ai Live ran in London on 9–10 September with a keynote from chief executive Jon Bratseth and speakers from Walmart, Etsy and RavenPack. Vespa is scheduled to appear at Shoptalk Fall in Nashville from 29 September to 1 October.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2 class="section-label">Further reading</h2>
+    <div class="further-reading">
+
+      <div class="fr-vendor" data-vendor="opensearch">
+        <h4>OpenSearch</h4>
+        <ul>
+          <li><a class="fr-link" href="https://www.linuxfoundation.org/press/opensearchcon-north-america-2026-to-showcase-five-years-of-innovation-powering-enterprise-search-observability-and-analytics">OpenSearchCon North America 2026 to showcase five years of innovation — Linux Foundation</a></li>
+          <li><a class="fr-link" href="https://opensearch.org/event/opensearchcon-north-america/">OpenSearchCon North America 2026 — OpenSearch</a></li>
+          <li><a class="fr-link" href="https://github.com/opensearch-project/opensearch-build/issues/6484">Release version 3.10.0 tracking issue — opensearch-build (GitHub)</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <strong>Search competitive intelligence — 72-hour pulse</strong> — 21 Sep – 24 Sep 2026 edition · <a href="https://frankswain-png.github.io/search_compintel/archive/search_archive.html">View archive</a>
+    <p class="tracked">Tracked: Pinecone · Weaviate · OpenSearch · Algolia · Qdrant · MongoDB · Databricks · Vespa</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'compintel-search-hidden-vendors';
+  var pills = Array.prototype.slice.call(document.querySelectorAll('.filter-pill[data-vendor]'));
+  var resetBtn = document.getElementById('resetPills');
+  var countEl = document.getElementById('filterCount');
+
+  function loadHidden(){
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch(e){ return []; }
+  }
+  function saveHidden(hidden){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(hidden)); } catch(e){}
+  }
+  function apply(){
+    var hidden = loadHidden();
+    pills.forEach(function(p){
+      var v = p.getAttribute('data-vendor');
+      p.classList.toggle('is-hidden', hidden.indexOf(v) !== -1);
+    });
+    document.querySelectorAll('[data-vendor]').forEach(function(el){
+      var v = el.getAttribute('data-vendor');
+      if (el.classList.contains('filter-pill')) return;
+      el.style.display = hidden.indexOf(v) !== -1 ? 'none' : '';
+    });
+    var shown = 8 - hidden.length;
+    countEl.textContent = shown + ' of 8 shown';
+  }
+  pills.forEach(function(p){
+    p.addEventListener('click', function(){
+      var v = p.getAttribute('data-vendor');
+      var hidden = loadHidden();
+      var idx = hidden.indexOf(v);
+      if (idx === -1) { hidden.push(v); } else { hidden.splice(idx,1); }
+      saveHidden(hidden);
+      apply();
+    });
+  });
+  resetBtn.addEventListener('click', function(){
+    saveHidden([]);
+    apply();
+  });
+  apply();
+})();
+</script>
+
+</body>
+</html>
